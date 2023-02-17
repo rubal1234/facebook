@@ -1,0 +1,286 @@
+body{
+	font-family: 'Poppins', sans-serif;
+}
+a{
+	text-decoration: none;
+}
+.nav-row{
+	position: fixed;
+	width: 100%;
+	background : #fff;
+	z-index: 1000;
+}
+.xe3v8dz{
+	fill: #fff;
+}
+.search-div{
+	border : 1px solid #ced4da;
+	border-radius: 30px;
+}
+.search-box{
+	color: 	#818589;
+	border-radius: 0 40px 40px 0;
+    border-width: 0px;
+	padding: 9px;
+	line-height: 28px;
+}
+.search-box:focus{
+	outline: none;
+}
+.search-box::placeholder{
+	color: 	#818589;
+}
+.search-icon{
+	color : #818589;
+}
+.icon-div{
+	width: 125px;
+	cursor: pointer;
+	position: relative;
+}
+.icon-div:hover{
+	background: rgba(0,0,0,0.1);
+	border-radius: 8px;
+}
+.icon{
+   font-size : 22px;
+}
+
+.icon-div.active {
+	border-bottom: 1px solid #1e82ff;
+    border-bottom-width: 3px;
+}
+.icon-div.active>i{
+	color: #1e82ff;
+}
+
+.icon-div.active:hover{
+	color: #1e82ff;	
+	background: none;
+	border-radius: 0px;
+}
+.image-icon-div{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #f1f1f1;
+	margin-left: 8px;
+	cursor: pointer;
+	position: relative;
+}
+.icon-div .tooltiptext {
+  visibility: hidden;
+  width: 70px;
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 130%;
+  left: 50%;
+  margin-left: -40px;
+  opacity: 0;
+  transition: opacity 1s;
+  font-size: 11px;
+}
+
+.icon-div:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-icon-div .tooltiptext {
+  visibility: hidden;
+  width: 70px;
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 130%;
+  left: 50%;
+  margin-left: -40px;
+  opacity: 0;
+  transition: opacity 1s;
+  font-size: 11px;
+}
+.image-icon-div:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 63px;
+  background-color: #fff;
+  box-shadow: 0px 0px 0px 0px #f1f1f1;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.right-side-menu{
+	right: 0px;
+}
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #818181;
+  display: block;
+  cursor: pointer;
+}
+.right-outer-div{
+	padding: 6px 8px 6px 16px;
+	font-size: 14px;
+}
+.sidenav a:hover{
+	background: rgba(0,0,0,0.1);
+	border-radius: 30px;
+}
+.side-menu{
+	border-bottom: 1px solid #ccc;
+	margin-left: 10px;
+}
+.side-shortcuts{
+    margin-left: 10px;	
+}
+.side-icon-div{
+	width: 30px;
+	height: 30px;
+	margin-left: 0px;
+}
+.right-side-icon-div{
+	width: 100px;
+	margin-left: 0px;
+}
+.university-link{
+	font-size: 11px;
+}
+.friend-req-text{
+	font-size: 15px;
+	float: right;
+	color: #1e82ff;
+}
+.contact-icon{
+	float : right;
+}
+.main-content{
+	margin: auto;
+	text-align: center;
+}
+.story-modal{
+  margin-top : 100px;
+}
+.status-modal{
+	margin-top: 20px;
+}
+.common-div .box{
+	width: 100%;
+	height: auto;
+    left : 0%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 4px 4px #f1f1f1;
+}
+.tab a{
+	color: #000;
+}
+.tab.active>a{
+	color: #1e82ff;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.acrd img {
+  border-radius: 5px 5px 0 0;
+}
+
+.card .container {
+  padding: 2px 16px;
+}
+
+.story-profile-text{
+	font-size: 14px;
+}
+.add-btn{
+	background: #1e82ff;
+	margin-top: -14px;
+	border : 3px solid #fff;
+}
+.story-content{
+	bottom: 0;
+	color: #fff;
+}
+.profile-account{
+	width: 77px;
+	top: 10px;
+	border-radius: 50%;
+}
+.profile-account img{
+	border : 3px solid #1e82ff;
+}
+.time-span{
+	font-size: 12px;
+	color: #818181;
+}
+.caption-text{
+	font-size: 14px;
+}
+.controller-div{
+	cursor: pointer;
+}
+.post-modal{
+	margin-bottom: 20px;
+}
+.cross-btn{
+	cursor: pointer;
+}
+.loader{
+	display: none;
+}
+@media screen and (min-width: 576px) {
+	.main-content{
+		width: inherit;
+
+	}
+	.common-div .box{
+		width: 565px;
+	}
+}
+@media screen and (min-width: 767px) {
+	.main-content{
+		width: inherit;
+		margin: 0px;
+		text-align: left;
+	}
+	.common-div .box{
+		width: 740px;
+	}
+}
+@media screen and (min-width: 981px){
+	.main-content{
+		text-align: center;
+	}
+	.common-div .box{
+		width: 650px;
+	}
+}
+@media screen and (min-width: 1200px){
+	.common-div .box{
+	}
+}
+
+
