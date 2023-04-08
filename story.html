@@ -6,7 +6,7 @@
 			    <div class="border-0">
 			      <div class="modal-header d-block pb-0">
 			        <div class="row">
-			        	<div class="col-6 icon-div tab w-50 active">
+			        	<div class="col-6 story-reel-div icon-div tab-div tab w-50 active tablinks" onclick="openCity(event, 'story')">
 			        		<a  class="d-flex align-items-center justify-content-center mt-2 mb-2">
 							  	<div class="side-icon-div d-flex align-items-center justify-content-center">
 						            <img src="images/reading-book.png" alt='img' class="image-icon w-100">
@@ -14,7 +14,7 @@
 						        <h6 class="ps-3 pt-1">Stories</h6>
 						    </a>
 			        	</div>
-			        	<div class="col-6 icon-div tab w-50">
+			        	<div class="col-6 story-reel-div icon-div tab-div tab w-50 tablinks"  onclick="openCity(event, 'reels')">
 			        		<a  class="d-flex align-items-center justify-content-center mt-2 mb-2">
 							  	<div class="side-icon-div d-flex align-items-center justify-content-center">
 						            <img src="images/video.png" alt='img' class="image-icon w-100">
@@ -24,59 +24,29 @@
 			        	</div>
 			        </div>
 			      </div>
-			      <div class="modal-body">
-			        <div class="row">
-			        	<div class="col-6 col-sm-3 d-flex align-items-stretch">
-
-			        			<div class="card">
-								  <img src="user.jpg" alt="Avatar" style="width:100%">
-								  <div class="container">
-								  	<button class="btn add-btn rounded-circle text-white">+</button>
-								    <p class="story-profile-text mt-2">Create Story</p> 
+			      <div class="modal-body  text-start">
+			        <div id="story" class="story-module tabcontent active-story-reels">
+			        	<div class="card-module">
+                           <div class="card story-reels h-100" id = "story" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+								  <div class="container text-center story-content position-absolute">
+								    <button class="btn add-btn rounded-circle text-white" >+</button>
+								    <p class="story-profile-text" style="margin-top: -135px;">Create Story</p>
 								  </div>
-								</div>
-			        			
-			        	</div>
-			        	<div class="col-6 col-sm-3 d-flex align-items-stretch">
-
-			        			<div class="card story">
-								  <img src="images/seema.jpg" class="h-100" alt="Avatar" style="width:100%">
-								   <div class="container profile-account position-absolute">
-									    <img src="images/seema2.jpg" alt='img' class="image-icon w-100 rounded-circle">
-									  </div>
-								  <div class="container story-content position-absolute">
-								 
-								    <p class="story-profile-text mt-2">Seema Oli</p> 
-								  </div>
-								</div>
-			        	
-			        	</div>
-			        	<div class="col-6 col-sm-3 mt-3 mt-sm-0 d-flex align-items-stretch">
-			        		<div class="card story">
-								  <img src="images/mumal.jpg" class="h-100" alt="Avatar" style="width:100%">
-								   <div class="container profile-account position-absolute">
-									    <img src="user.jpg" alt='img' class="image-icon w-100 rounded-circle">
-									  </div>
-								  <div class="container story-content position-absolute">
-								 
-								    <p class="story-profile-text mt-2">Mumal Shah</p> 
-								  </div>
-								</div>
-			        	</div>
-
-			        	<div class="col-6 col-sm-3 mt-3 mt-sm-0 d-flex align-items-stretch">
-			        		<div class="card story">
-								  <img src="images/katrina2.jpg" class="h-100" alt="Avatar" style="width:100%">
-								   <div class="container profile-account position-absolute">
-									    <img src="images/seema.jpg" alt='img' class="image-icon w-100 rounded-circle">
-									  </div>
-								  <div class="container story-content position-absolute">
-								 
-								    <p class="story-profile-text mt-2">Katrina Kaif</p> 
-								  </div>
-								</div>
-			        	</div>
+							</div>
+			            </div>
 			        </div>
+
+			        <div id="reels" class="reel-module tabcontent">
+					   	<div class="card-module">
+
+			        			<div class="card story-reels h-100" id = "reels" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+								  <div class="container text-center story-content position-absolute">
+								    <button class="btn add-btn rounded-circle text-white" >+</button>
+								    <p class="story-profile-text" style="margin-top: -135px;">Add Reel</p>
+								  </div>
+								</div>	
+			            </div>
+					</div>
 			      </div>
 			    </div>
 			  </div>
@@ -85,4 +55,57 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<form action="story.php" method="post" enctype="multipart/form-data">
+	<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<div class="w-100 text-center">
+	      		<h5 class="modal-title" id="exampleModalLabel">Add Story</h5>
+	      	</div>
+	      	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<input type="file" name="imgInp" accept="image/*" class="form-control story-reel-btn" id="imgInp" onchange="loadFile(event)">
+	      	<div class="m-3 image-div" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+	      		<img id="output" class="w-100" />
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <input type="submit" class="btn btn-primary w-100 story-btn disabled" value = "Post Story">
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</form>
+
+<form action="reel.php" method="post" enctype="multipart/form-data">
+	<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<div class="w-100 text-center">
+	      		<h5 class="modal-title" id="exampleModalLabel">Add Reel</h5>
+	      	</div>
+	      	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<input type="file" name="vdoInp" accept="video/mp4,video/x-m4v,video/*" class="form-control story-reel-btn" id="vdoInp">
+	      </div>
+	      <div class="modal-footer">
+	        <input type="submit" class="btn btn-primary w-100 story-btn disabled" value = "Post Reel">
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</form>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal1">
+  <span class="close img-close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
 </div>
