@@ -1,15 +1,15 @@
 var all_post_count = 0;
 $(document).ready(function(){
-	$(".navigation-section").load('navigation.html');
-	$(".side-navigation").load("left_nav_bar.html");
-	$(".right-side-navigation").load("right_nav_bar.html");
-	$(".story-div").load("story.html");
-	$(".status-div").load("status.html");
+	$(".navigation-section").load('views/navigation.html');
+	$(".side-navigation").load("views/left_nav_bar.html");
+	$(".right-side-navigation").load("views/right_nav_bar.html");
+	$(".story-div").load("views/story.html");
+	$(".status-div").load("views/status.html");
 	$(".loader").hide();
 
 $.ajax({
 	type : 'POST',
-	url : 'data.php',
+	url : 'modal/data.php',
 	data : {get_story : true},
 	success : function(data){
 		const all_data = JSON.parse(data);
@@ -39,7 +39,7 @@ $.ajax({
 
 $.ajax({
 	type : 'POST',
-	url : 'data.php',
+	url : 'modal/data.php',
 	data : {get_reels : true},
 	success : function(data){
 		const all_data = JSON.parse(data);
@@ -64,7 +64,7 @@ $.ajax({
 
 $.ajax({
 	type : 'POST',
-	url : 'data.php',
+	url : 'modal/data.php',
 	data : {post_update : 1,limit_count : 5,post_count : all_post_count},
 	success : function(data){
 		const all_data = JSON.parse(data);
@@ -219,7 +219,7 @@ function onScroll(){
 
    	    $.ajax({
    	        type : 'POST',
-	        url : 'data.php',
+	        url : 'modal/data.php',
 	        data : {post_update : 1,limit_count : 5,post_count : all_post_count},
 	        success : function(data){
 	        const all_data = JSON.parse(data);
@@ -412,7 +412,7 @@ $(document).on("click",".like-div",function(e){
 
 	$.ajax({
 		type : 'POST',
-		url : 'data.php',
+		url : 'modal/data.php',
 		data : {like_update : 1,data_post_id : post_id,count : count},
 		success : function(data){
 			console.log("hello");
@@ -524,7 +524,7 @@ $(document).on('keyup',".user-comment",function (e) {
 
         $.ajax({
 	    	type : 'post',
-	    	url : 'data.php',
+	    	url : 'modal/data.php',
 	    	data : {setComment : true,id : row_id,commentText : text},
 	    	success : function(data){
 	          console.log("hello");
