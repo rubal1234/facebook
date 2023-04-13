@@ -33,7 +33,7 @@ class Post
 
 		header('Location: /facebook');
 
-		$insert_query = "INSERT INTO post (image,name,caption) VALUES ('user-images/$file_name','$this->user_name','$caption_text')";
+		$insert_query = "INSERT INTO post (image,name,caption) VALUES ('../user-images/$file_name','$this->user_name','$caption_text')";
 
 		if ($this->conn->query($insert_query) === TRUE) {
 			  echo "New record created successfully";

@@ -1,3 +1,7 @@
+// Generate a random key and IV (initialization vector) for AES encryption
+	var key = CryptoJS.lib.WordArray.random(16);
+	var iv = CryptoJS.lib.WordArray.random(16);
+
 $(document).ready(function(e){
 	$.ajax({
 		type : 'post',
@@ -8,7 +12,7 @@ $(document).ready(function(e){
 
 			console.log(data);
 			if(data.length === 4){
-				window.location.href = "/facebook/views/index.html";
+				window.location.href = "/facebook/views/";
 			}
 
 
@@ -67,10 +71,29 @@ $(document).on("click","#sign_up",function(e){
 	
 	if(first_name != "" && last_name != "" && email_phn != "" && password != ""){
 
+		var data = {
+			first_name : first_name,
+			last_name : last_name,
+			email_number : email_phn,
+			password : password,
+			dob : dob,
+			gender : gender
+		}
+
+		// Encrypt the data using AES encryption with the random key and IV
+		var encrypted_data = CryptoJS.AES.encrypt(JSON.stringify(data), key, { iv: iv });
+
+		// Convert the encrypted data to a base64-encoded string
+		var encoded_data = encrypted_data.toString();
+
 		$.ajax({
 			type : 'post',
 			url : 'data.php',
-			data : {first_name : first_name , last_name : last_name , email_number : email_phn , password : password , dob : dob , gender : gender},
+			data: {
+		      data: encoded_data,
+		      key: key.toString(CryptoJS.enc.Hex),
+		      iv: iv.toString(CryptoJS.enc.Hex)
+		    },
 			success : function(data){
                 
                 $(".modal").hide();
@@ -91,14 +114,30 @@ $(document).on("click","#sign_up",function(e){
 $(document).on("click",".login-button",function(e){
 	var user_name = $(".email-box").val().trim();
 	var password = $(".pw-box").val().trim();
+
+	var data = {
+		check_login : true,
+		user_name : user_name,
+		password : password
+	}
+
+	// Encrypt the data using AES encryption with the random key and IV
+	var encrypted_data = CryptoJS.AES.encrypt(JSON.stringify(data), key, { iv: iv });
+
+	// Convert the encrypted data to a base64-encoded string
+	var encoded_data = encrypted_data.toString();
+
 	$.ajax({
 		type : 'post',
 		url : 'jwt.php',
-		data : {check_login : true ,user_name : user_name , password : password},
-
+		data: {
+		    data: encoded_data,
+		    key: key.toString(CryptoJS.enc.Hex),
+		    iv: iv.toString(CryptoJS.enc.Hex)
+		},
 		success : function(data){
 			if(data.length === 4){
-				window.location.href = "/facebook/views/index.html";
+				window.location.href = "/facebook/views/";
 			}
 		}
 	})

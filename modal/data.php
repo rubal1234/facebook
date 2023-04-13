@@ -31,7 +31,9 @@ class Modal
 			   array_push($all_data, $arr);
 			}
 
-			echo json_encode($all_data);
+			$json_data = json_encode($all_data);
+
+			echo base64_encode($json_data);
 	}
 
 
@@ -58,12 +60,17 @@ class Modal
 
 		while($data = mysqli_fetch_assoc($result)){
 		   $arr = [];
-		   array_push($arr, $data['name'],$data['image_path']);
+		   array_push($arr, $data['name'], $data['image_path']);
 		   array_push($all_data, $arr);
 		}
-		echo json_encode($all_data);
+
+		$json_data = json_encode($all_data);
+
+		echo base64_encode($json_data);
 
 	}
+
+
 
 	function updateReels(){
 
@@ -78,7 +85,10 @@ class Modal
 		   array_push($arr,$data['video_path']);
 		   array_push($all_data, $arr);
 		}
-		echo json_encode($all_data);
+
+		$json_data =  json_encode($all_data);
+
+		echo base64_encode($json_data);
 	}
 
 	function addComment(){

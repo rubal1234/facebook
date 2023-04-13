@@ -29,7 +29,7 @@ class Reel
 
 		move_uploaded_file($file, '../reels-videos/' . $file_name);
 
-		$insert_query = "INSERT INTO reels (name,video_path) VALUES ('$this->user_name','reels-videos/$file_name')";
+		$insert_query = "INSERT INTO reels (name,video_path) VALUES ('$this->user_name','../reels-videos/$file_name')";
 
 		if ($this->conn->query($insert_query) === TRUE) {
 

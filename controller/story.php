@@ -28,7 +28,7 @@ class Story{
 
 		move_uploaded_file($file, '../story-images/' . $file_name);
 
-		$insert_query = "INSERT INTO story (name,image_path) VALUES ('$this->user_name','story-images/$file_name')";
+		$insert_query = "INSERT INTO story (name,image_path) VALUES ('$this->user_name','../story-images/$file_name')";
 
 		if ($this->conn->query($insert_query) === TRUE) {
 

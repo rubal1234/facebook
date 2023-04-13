@@ -1,18 +1,22 @@
 var all_post_count = 0;
 $(document).ready(function(){
-	$(".navigation-section").load('views/navigation.html');
-	$(".side-navigation").load("views/left_nav_bar.html");
-	$(".right-side-navigation").load("views/right_nav_bar.html");
-	$(".story-div").load("views/story.html");
-	$(".status-div").load("views/status.html");
+	$(".navigation-section").load('navigation.html');
+	$(".side-navigation").load("left_nav_bar.html");
+	$(".right-side-navigation").load("right_nav_bar.html");
+	$(".story-div").load("story.html");
+	$(".status-div").load("status.html");
 	$(".loader").hide();
+
 
 $.ajax({
 	type : 'POST',
-	url : 'modal/data.php',
+	url : '../modal/data.php',
 	data : {get_story : true},
-	success : function(data){
-		const all_data = JSON.parse(data);
+	success : function(response){
+
+		var decoded_data = atob(response);
+
+		const all_data = JSON.parse(decoded_data);
 
 		for(var i = 0; i< all_data.length ; i++){
 
@@ -39,10 +43,13 @@ $.ajax({
 
 $.ajax({
 	type : 'POST',
-	url : 'modal/data.php',
+	url : '../modal/data.php',
 	data : {get_reels : true},
-	success : function(data){
-		const all_data = JSON.parse(data);
+	success : function(response){
+		
+		var decoded_data = atob(response);
+
+		const all_data = JSON.parse(decoded_data);
 
 		for(var i = 0; i< all_data.length ; i++){
 
@@ -64,17 +71,19 @@ $.ajax({
 
 $.ajax({
 	type : 'POST',
-	url : 'modal/data.php',
+	url : '../modal/data.php',
 	data : {post_update : 1,limit_count : 5,post_count : all_post_count},
-	success : function(data){
-		const all_data = JSON.parse(data);
+	success : function(response){
+		var decoded_data = atob(response);
+
+		const all_data = JSON.parse(decoded_data);
 		for (var i = 0; i < all_data.length; i++) {
 			var image_path = all_data[i][1];
 			var image_name = image_path.split('/');
-			if(image_name[1].length != 0){
+			if(image_name[2].length != 0){
 				image_path = all_data[i][1];
 			}else{
-				image_path = "user-images/default.png";
+				image_path = "../user-images/default.png";
 			}
 			var html = `<div class="container item" id="template">
 	                        <div class="row">
@@ -93,14 +102,14 @@ $.ajax({
 								                                            <div class="ps-3 text-start">
 								          	                                    <span>`+all_data[i][2]+`</span><br>
 								          	                                    <span class="time-span">1 h</span>
-								          	                                    <img src="images/world.png" style="width: 12px;" class="ms-1">
+								          	                                    <img src="../images/world.png" style="width: 12px;" class="ms-1">
 								                                            </div>   
 								                                        </div>
 			        				                                </div>
 			        				                                <div class="col-6">
 			        					                                <div class="text-end">
 			        						                                <i class="fa-solid fa-ellipsis px-3" style="font-size: 20px;vertical-align: middle;"></i>
-			        						                                <img src="images/cross.png" alt='img' class="image-icon cross-btn" style="width: 20px;height: 20px;">
+			        						                                <img src="../images/cross.png" alt='img' class="image-icon cross-btn" style="width: 20px;height: 20px;">
 			        					                                </div>
 			        				                                </div>
 			        			                                </div> 
@@ -116,7 +125,7 @@ $.ajax({
 			        			                                </div>
 			        			                                <div class="row">
 			        				                                <div class="col text-start mt-2 liked-people">
-			        					                                <img src="images/like.png" style="width: 16px;">
+			        					                                <img src="../images/like.png" style="width: 16px;">
 			        					                                <span class="ps-2 caption-text liked-text">`+all_data[i][4]+` People liked this</span>
 			        				                                </div>
 			        				                                <div class = "col text-end mt-2 comment-count-section">
@@ -137,13 +146,13 @@ $.ajax({
 			        	                                </div>
 			        	                                <div class="col-6 col-sm-4">
 			        		                                <div class="d-flex justify-content-center align-items-center controller-div comment-div">
-			        			                                <img src="images/comment.png" style="width: 20px">
+			        			                                <img src="../images/comment.png" style="width: 20px">
 			        			                                <span class="ps-2">Comment</span>
 			        		                                </div>
 			        	                                </div>
 			        	                                <div class="col-6 col-sm-4 d-none d-sm-block">
 			        		                                <div class="d-flex justify-content-center align-items-center controller-div share-div">
-			        			                                <img src="images/share.png" style="width: 20px">
+			        			                                <img src="../images/share.png" style="width: 20px">
 			        			                                <span class="ps-2">Share</span>
 			        		                                </div>
 			        	                                </div>
@@ -219,10 +228,12 @@ function onScroll(){
 
    	    $.ajax({
    	        type : 'POST',
-	        url : 'modal/data.php',
+	        url : '../modal/data.php',
 	        data : {post_update : 1,limit_count : 5,post_count : all_post_count},
-	        success : function(data){
-	        const all_data = JSON.parse(data);
+	        success : function(response){
+	        var decoded_data = atob(response);
+
+		    const all_data = JSON.parse(decoded_data);
 	        	if(all_data.length){
 				  $(".loader").hide();
 			    }else{
@@ -231,10 +242,10 @@ function onScroll(){
 		for (var i = 0; i < all_data.length; i++) {	
 		    var image_path = all_data[i][1];
 			var image_name = image_path.split('/');
-			if(image_name[1].length != 0){
+			if(image_name[2].length != 0){
 				image_path = all_data[i][1];
 			}else{
-				image_path = "user-images/default.png";
+				image_path = "../user-images/default.png";
 			}
 			var html = `<div class="container item" id="template">
 	        <div class="row">
@@ -253,14 +264,14 @@ function onScroll(){
 								                                <div class="ps-3 text-start">
 								          	                        <span>`+all_data[i][2]+`</span><br>
 								          	                        <span class="time-span">1 h</span>
-								          	                        <img src="images/world.png" style="width: 12px;" class="ms-1">
+								          	                        <img src="../images/world.png" style="width: 12px;" class="ms-1">
 								                                </div>   
 								                        </div>
 			        				                </div>
 			        				                <div class="col-6">
 			        					                <div class="text-end">
 			        						                <i class="fa-solid fa-ellipsis px-3" style="font-size: 20px;vertical-align: middle;"></i>
-			        						                <img src="images/cross.png" alt='img' class="image-icon cross-btn" style="width: 20px;height: 20px;">
+			        						                <img src="../images/cross.png" alt='img' class="image-icon cross-btn" style="width: 20px;height: 20px;">
 			        					                </div>
 			        				                </div>
 			        			                </div> 
@@ -276,8 +287,11 @@ function onScroll(){
 			        			            </div>
 			        			            <div class="row">
 			        				            <div class="col text-start mt-2 liked-people">
-			        					           <img src="images/like.png" style="width: 16px;">
+			        					           <img src="../images/like.png" style="width: 16px;">
 			        					           <span class="ps-2 caption-text liked-text">`+all_data[i][4]+` People liked this</span>
+			        				            </div>
+			        				            <div class = "col text-end mt-2 comment-count-section">
+			        				                <span class = "caption-text">1 People Commented</span>
 			        				            </div>
 			        			            </div>
 						                </div>
@@ -294,13 +308,13 @@ function onScroll(){
 			        	        </div>
 			        	        <div class="col-6 col-sm-4">
 			        		        <div class="d-flex justify-content-center align-items-center controller-div comment-div">
-			        			       <img src="images/comment.png" style="width: 20px">
+			        			       <img src="../images/comment.png" style="width: 20px">
 			        			       <span class="ps-2">Comment</span>
 			        		        </div>
 			        	        </div>
 			        	        <div class="col-6 col-sm-4 d-none d-sm-block">
 			        		        <div class="d-flex justify-content-center align-items-center controller-div share-div">
-			        			        <img src="images/share.png" style="width: 20px">
+			        			        <img src="../images/share.png" style="width: 20px">
 			        			        <span class="ps-2">Share</span>
 			        		        </div>
 			        	        </div>
@@ -412,7 +426,7 @@ $(document).on("click",".like-div",function(e){
 
 	$.ajax({
 		type : 'POST',
-		url : 'modal/data.php',
+		url : '../modal/data.php',
 		data : {like_update : 1,data_post_id : post_id,count : count},
 		success : function(data){
 			console.log("hello");
@@ -524,7 +538,7 @@ $(document).on('keyup',".user-comment",function (e) {
 
         $.ajax({
 	    	type : 'post',
-	    	url : 'modal/data.php',
+	    	url : '../modal/data.php',
 	    	data : {setComment : true,id : row_id,commentText : text},
 	    	success : function(data){
 	          console.log("hello");
