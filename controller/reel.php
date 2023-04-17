@@ -1,7 +1,8 @@
 <?php 
 
 require('../connection/connection.php');
-require('user.php');
+
+session_start();
 
 class Reel
 {
@@ -14,11 +15,8 @@ class Reel
    	{
    		$connection = new Connection();
 
-   		$user = new User();
-
 		$this->conn = $connection->getConnection();
 
-		$this->user_name = $user->findUser();
    	}
 
    	function updateReel(){
@@ -27,9 +25,11 @@ class Reel
 
 		$file = $_FILES['vdoInp']['tmp_name'];
 
+		$name = $_SESSION['name'];
+
 		move_uploaded_file($file, '../reels-videos/' . $file_name);
 
-		$insert_query = "INSERT INTO reels (name,video_path) VALUES ('$this->user_name','../reels-videos/$file_name')";
+		$insert_query = "INSERT INTO reels (name,video_path) VALUES ('$name','../reels-videos/$file_name')";
 
 		if ($this->conn->query($insert_query) === TRUE) {
 

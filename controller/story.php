@@ -1,6 +1,7 @@
 <?php 
 require('../connection/connection.php');
-require('user.php');
+
+session_start();
 
 class Story{
 
@@ -12,11 +13,8 @@ class Story{
    	{
    		$connection = new Connection();
 
-   		$user = new User();
-
 		$this->conn = $connection->getConnection();
 
-		$this->user_name = $user->findUser();
    	}
 
 
@@ -26,9 +24,11 @@ class Story{
 
 		$file = $_FILES['imgInp']['tmp_name'];
 
+		$name = $_SESSION['name'];
+
 		move_uploaded_file($file, '../story-images/' . $file_name);
 
-		$insert_query = "INSERT INTO story (name,image_path) VALUES ('$this->user_name','../story-images/$file_name')";
+		$insert_query = "INSERT INTO story (name,image_path) VALUES ('$name','../story-images/$file_name')";
 
 		if ($this->conn->query($insert_query) === TRUE) {
 

@@ -2,6 +2,8 @@
 
 require('../connection/connection.php');
 
+session_start();
+
 class Modal
 {
 	public $conn;
@@ -107,6 +109,47 @@ class Modal
 
 	}
 
+	function removeCookie(){
+		if (isset($_COOKIE['jwt'])){
+			setcookie("jwt", '', time() - 60*60, "/", "", false, true);
+		}
+	}
+
+	function changePwd(){
+
+		$email = $_SESSION['email'];
+
+		// Decode the data, key, and IV received via AJAX
+		$encoded_data = $_POST['data'];
+
+		$key = hex2bin($_POST['key']);
+
+		$iv = hex2bin($_POST['iv']);
+
+		// Decrypt the data using AES decryption with the key and IV
+		$decrypted_data = openssl_decrypt(base64_decode($encoded_data), 'aes-128-cbc', $key, OPENSSL_RAW_DATA, $iv);
+
+		// Use the data as needed
+		$data = json_decode($decrypted_data);
+
+		$password = $data->pwd;
+
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+		$update_query = "UPDATE user SET password =  '$hashed_password' WHERE email_phone = '$email'";
+
+		if ($this->conn->query($update_query) === TRUE) {
+
+			  echo "New record created successfully";
+
+		} else {
+
+			  echo "Error: " . $sql . "<br>" . $conn->error;
+
+		}
+
+	}
+
 
 }
 
@@ -132,6 +175,14 @@ if(isset($_POST['get_reels'])){
 
 if(isset($_POST['setComment'])){
    $modal->addComment(); 	 
+}
+
+if(isset($_POST['cookie'])){
+	$modal->removeCookie();
+}
+
+if(isset($_POST['changePwd'])){
+	$modal->changePwd();
 }
 
   

@@ -7,6 +7,8 @@ require_once 'vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 
+session_start();
+
 
 class Authenticate
 {
@@ -32,6 +34,12 @@ class Authenticate
             $this->validate = true;
             echo json_encode($this->validate);
             exit;
+        }else{
+
+            $this->validate = false;
+            echo json_encode($this->validate);
+            exit;
+
         }
 
     }
@@ -47,6 +55,21 @@ class Authenticate
             $this->username = $row['email_phone'];
 
             $this->password =  $row['password'];
+
+            $_SESSION['name'] = $row['first_name'] . " " . $row['last_name'];
+
+            $_SESSION['email'] = $row['email_phone'];
+
+             
+            if(strlen($row['image_path']) != 0){
+
+              $_SESSION['image-path'] = $row['image_path'];
+
+            }else{
+
+                $_SESSION['image-path'] = "../user-images/default.png";
+
+            }
 
         }
 
@@ -86,9 +109,7 @@ class Authenticate
             echo json_encode($this->validate);
                 
             exit;
-        } else {
-            echo "Invalid credentials.";
-        }
+        } 
         
 
         

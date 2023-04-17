@@ -7,6 +7,20 @@ a{
 input:focus{
   box-shadow: none !important;
 }
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+/* Set scrollbar width and color */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
 .nav-row{
 	position: fixed;
 	width: 100%;
@@ -111,7 +125,7 @@ input:focus{
   transition: opacity 1s;
   font-size: 11px;
 }
-.image-icon-div:hover .tooltiptext {
+.image-icon-div:hover:not(:last-child) .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
@@ -397,6 +411,120 @@ input:focus{
     margin-top: 20px;
 }
 
+.logout-div{
+	position: absolute;
+	top: 110%;
+	background: #ddd;
+	border-radius: 4px;
+	margin-right: 80px;
+	width: 130px;
+	text-align: center;
+	display: none;
+}
+.account-module{
+	padding: 8px 16px;
+}
+
+.logout-div::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: 35px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #ddd transparent;
+}
+.account-module:hover{
+	background: #f1f1f1;
+}
+.account-title{
+  font-size: 26px;
+  color: #000;
+}
+.account-img{
+  margin-top: -16px;
+  width: 80px;
+}
+.setting-div{
+  box-shadow: 0px 3px 6px #00000029;
+}
+.setting-div ul{
+  list-style: none;
+  padding: 0;
+}
+.setting-div ul li{
+  font-size: 12px;
+  padding-top: 6px;
+  padding-left: 17px;
+  cursor: pointer;
+}
+.current{
+  color: #1e82ff !important;
+  border-left: 5px solid #1e82ff;
+  padding-left: 12px !important
+}
+
+.label_text{
+  font-size: 13px;
+  color: #6A6A6A;
+  margin-top: -12px;
+  margin-left: 12px;
+  font-family: Poppins,sans-serif;
+  z-index: 1;
+}
+.input_text{
+  border-radius: 8px !important;
+}
+.icon_style{
+  margin-top: -29px !important;
+  margin-right: 18px;
+  color: #707070;
+}
+.input_text:focus{
+  box-shadow: none !important;
+  border : 1px solid #1e82ff;
+}
+.form-group:focus-within .label_text{
+  color: #1e82ff;
+}
+.form-group:focus-within .icon_style{
+  color: #1e82ff;
+}
+
+.login_input{
+  border-radius: 0px !important;
+  border-bottom: 2px solid #235784 !important;
+}
+.login_input:focus{
+  box-shadow: none;
+}
+.forgot{
+  cursor: pointer;
+  text-decoration: underline;
+}
+.image-upload img{
+  cursor: pointer;
+}
+.login_btn{
+    border: 0;
+    height: 46px;
+    background: #1e82ff;
+}
+.filter-div{
+	margin-top: 80px;
+}
+.change-picture-div{
+	display: block;
+}
+.change-password-div{
+	display: none;
+}
+.change_pwd_btn{
+  border: 0;
+  height: 46px;
+  background: #1e82ff;
+}
 @media screen and (min-width: 576px) {
 	.main-content{
 		width: inherit;
@@ -407,6 +535,9 @@ input:focus{
 	}
 	.card-module{
 		width: 33%;
+	}
+	.logout-div{
+		top: 130%;
 	}
 }
 @media screen and (min-width: 767px) {

@@ -1,24 +1,20 @@
 <?php 
 
 require('../connection/connection.php');
-require('user.php');
+
+
+session_start();
 
 class Post
 {
 	
 	public $conn;
-
-   	public $user_name;
    	
    	function __construct()
    	{
    		$connection = new Connection();
 
-   		$user = new User();
-
 		$this->conn = $connection->getConnection();
-
-		$this->user_name = $user->findUser();
    	}
 
    	function updatePost(){
@@ -29,11 +25,13 @@ class Post
 
 		$file = $_FILES['file']['tmp_name'];
 
+		$name = $_SESSION['name'];
+
 		move_uploaded_file($file, '../user-images/' . $file_name);
 
 		header('Location: /facebook');
 
-		$insert_query = "INSERT INTO post (image,name,caption) VALUES ('../user-images/$file_name','$this->user_name','$caption_text')";
+		$insert_query = "INSERT INTO post (image,name,caption) VALUES ('../user-images/$file_name','$name','$caption_text')";
 
 		if ($this->conn->query($insert_query) === TRUE) {
 			  echo "New record created successfully";

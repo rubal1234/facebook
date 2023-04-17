@@ -1,10 +1,25 @@
 var all_post_count = 0;
 $(document).ready(function(){
-	$(".navigation-section").load('navigation.html');
-	$(".side-navigation").load("left_nav_bar.html");
+
+	$.ajax({
+
+		type : 'post',
+		url : '../jwt.php',
+		data : {checkCookie : true},
+		success : function(data){
+			if(data.length !== 4){
+				window.location.href = "/facebook";
+			}
+		}
+
+
+	})
+
+	$(".navigation-section").load('navigation.php');
+	$(".side-navigation").load("left_nav_bar.php");
 	$(".right-side-navigation").load("right_nav_bar.html");
 	$(".story-div").load("story.html");
-	$(".status-div").load("status.html");
+	$(".status-div").load("status.php");
 	$(".loader").hide();
 
 
@@ -549,6 +564,52 @@ $(document).on('keyup',".user-comment",function (e) {
     }
                 
 });
+
+
+$(document).on("click",".account-div",function(e){
+	$(".logout-div").toggle({
+		duration: 300,
+		easing: 'linear'
+	});
+
+})
+
+$(document).on("click",".logout-module",function(e){
+	$.ajax({
+		type : 'post',
+		url : '../modal/data.php',
+		data : {cookie : true},
+		success : function(){
+         window.location.href = "/facebook"
+		}
+	})
+})
+
+$(document).on("click",".setting-module",function(e){
+	window.location.href = "../views/profile.php";
+})
+
+$(document).on("click",".setting-div li", function(e){
+    $(".setting-div li").removeClass("current");
+	$(this).addClass("current");
+
+	if($(this).attr("id")){
+		$(".change-picture-div").show();
+		$(".change-password-div").hide();
+	}else{
+		$(".change-picture-div").hide();
+		$(".change-password-div").show();
+	}
+})
+
+function loading(e){
+	$(e).children().show();
+}
+
+$(document).on("change","#file-input",function(e){
+	$('.login_btn').removeClass("disabled");
+})
+
 
 
 

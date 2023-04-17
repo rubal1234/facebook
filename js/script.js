@@ -9,13 +9,9 @@ $(document).ready(function(e){
 		data : {checkCookie : true},
 
 		success : function(data){
-
-			console.log(data);
 			if(data.length === 4){
 				window.location.href = "/facebook/views/";
 			}
-
-
 
 		}
 	})
@@ -138,8 +134,51 @@ $(document).on("click",".login-button",function(e){
 		success : function(data){
 			if(data.length === 4){
 				window.location.href = "/facebook/views/";
+			}else{
+				Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: 'Incorrect username or password'
+				})
 			}
 		}
 	})
 
+})
+
+$(document).on("click",".change_pwd_btn",function(e){
+
+	var new_pwd = $(".npwd").val().trim();
+	var cpwd = $(".cpwd").val().trim();
+
+	var data = {
+		pwd : new_pwd,
+	}
+
+	// Encrypt the data using AES encryption with the random key and IV
+	var encrypted_data = CryptoJS.AES.encrypt(JSON.stringify(data), key, { iv: iv });
+
+	// Convert the encrypted data to a base64-encoded string
+	var encoded_data = encrypted_data.toString();
+
+	if(new_pwd !== "" && cpwd !== "" && new_pwd === cpwd){
+		$.ajax({
+		type : 'post',
+		url : '../modal/data.php',
+		data : {
+			changePwd : true,
+			data : encoded_data,
+			key: key.toString(CryptoJS.enc.Hex),
+		    iv: iv.toString(CryptoJS.enc.Hex)
+		 },
+		success : function(data){
+			$(".npwd").val("");
+			$(".cpwd").val("");
+			window.location.href = "/facebook";
+		}
+	})
+	}else{
+		alert("Password does not match");
+	}
+	
 })
